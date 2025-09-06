@@ -13,7 +13,12 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("search_tab")
+                .environment(\.locale, Locale(identifier: "tr"))
+            
+            Text("search_tab")
+                .environment(\.locale, Locale(identifier: "en"))
+
         }
         .padding()
     }
