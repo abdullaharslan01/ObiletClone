@@ -21,7 +21,7 @@ struct OTabView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            Text("Ara")
+            HomeView()
                 .tabItem {
                     Image(systemName: OTab.search.symbol)
                     Text(OTab.search.title)

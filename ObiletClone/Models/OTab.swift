@@ -16,13 +16,13 @@ enum OTab: String, Identifiable {
 
     var id: String { rawValue }
 
-    var title: LocalizedStringKey {
+    var title: String {
         switch self {
-        case .search: return LocaleKeys.Tab.search.rawValue
-        case .myTrips: return LocaleKeys.Tab.myTrips.rawValue
-        case .promotions: return LocaleKeys.Tab.promotions.rawValue
-        case .help: return LocaleKeys.Tab.help.rawValue
-        case .account: return LocaleKeys.Tab.account.rawValue
+        case .search: return "Ara"
+        case .myTrips: return "Seyehatlerim"
+        case .promotions: return "Kampanyalar"
+        case .help: return "Yardım"
+        case .account: return "Hesabım"
         }
     }
 
