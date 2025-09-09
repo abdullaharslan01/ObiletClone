@@ -108,9 +108,23 @@ struct HomeView: View {
             .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
             .padding(.horizontal)
             .offset(y: -50)
+            
+            PromotionView(promotions: promotionData)
+                .padding(.horizontal)
+                .padding(.bottom,50)
         }
         .background(Color.oBackground)
-        .ignoresSafeArea()
+        .clipped()
+    }
+    
+    private var promotionData: [PromotionCategory: [Promotion]] {
+        return [
+            .featured: Promotion.featured,
+            .bus: Promotion.bus,
+            .flight: Promotion.flight,
+            .hotel: Promotion.hotel,
+            .ferry: Promotion.ferry
+        ]
     }
 }
 

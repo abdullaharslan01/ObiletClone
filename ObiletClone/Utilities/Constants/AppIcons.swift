@@ -21,5 +21,7 @@ enum AppIcons {
     static let hotel = "bed.double"
     static let car = "car.fill"
     static let ferry = "ferry.fill"
+    static let infoCircle = "info.circle"
+    static let star = "star.fill"
 }
 
