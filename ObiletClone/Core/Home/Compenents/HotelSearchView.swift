@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct HotelSearchView: View {
     @Binding var searchModel: HotelSearchModel
     let onToLocationTap: () -> Void
@@ -15,6 +14,14 @@ struct HotelSearchView: View {
     let onCheckOutDateTap: () -> Void
     let onGuestTap: () -> Void
     let onSearchTap: () -> Void
+
+    var toLocationTitle: String
+    var checkInTitle: String
+    var checkOutTitle: String
+    var selectDateText: String
+    var addGuestText: String
+    var businessTripText: String
+    var searchButtonText: String
 
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -35,19 +42,49 @@ struct HotelSearchView: View {
         return (day, month, weekday)
     }
 
+    init(
+        searchModel: Binding<HotelSearchModel>,
+        onToLocationTap: @escaping () -> Void,
+        onCheckInDateTap: @escaping () -> Void,
+        onCheckOutDateTap: @escaping () -> Void,
+        onGuestTap: @escaping () -> Void,
+        onSearchTap: @escaping () -> Void,
+        toLocationTitle: String = "Nereye",
+        checkInTitle: String = "GİRİŞ TARİHİ",
+        checkOutTitle: String = "ÇIKIŞ TARİHİ",
+        selectDateText: String = "Tarih Seçiniz",
+        addGuestText: String = "Misafir Ekle",
+        businessTripText: String = "İş için seyahat ediyorum",
+        searchButtonText: String = "Otel Ara"
+    ) {
+        _searchModel = searchModel
+        self.onToLocationTap = onToLocationTap
+        self.onCheckInDateTap = onCheckInDateTap
+        self.onCheckOutDateTap = onCheckOutDateTap
+        self.onGuestTap = onGuestTap
+        self.onSearchTap = onSearchTap
+        self.toLocationTitle = toLocationTitle
+        self.checkInTitle = checkInTitle
+        self.checkOutTitle = checkOutTitle
+        self.selectDateText = selectDateText
+        self.addGuestText = addGuestText
+        self.businessTripText = businessTripText
+        self.searchButtonText = searchButtonText
+    }
+
     var body: some View {
         VStack(spacing: 25) {
             HStack(spacing: 15) {
                 Image(AppImages.location)
 
-                LocationSelectionView(title: "Nereye", selectedLocation: searchModel.toCity) {
+                LocationSelectionView(title: toLocationTitle, selectedLocation: searchModel.toCity) {
                     onToLocationTap()
                 }
-
-            }.frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                .padding(.vertical)
-                .oCardBackground()
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
+            .padding(.vertical)
+            .oCardBackground()
 
             HStack(spacing: 15) {
                 Image(systemName: AppIcons.calendar)
@@ -57,7 +94,7 @@ struct HotelSearchView: View {
                     .foregroundStyle(.oGray.opacity(0.7))
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("GİRİŞ TARİHİ")
+                    Text(checkInTitle)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 14, weight: .bold))
 
@@ -75,7 +112,7 @@ struct HotelSearchView: View {
                             .foregroundStyle(.oGray.opacity(0.7))
                         }
                     } else {
-                        Text("Tarih Seçiniz")
+                        Text(selectDateText)
                             .foregroundStyle(.oGray.opacity(0.5))
                             .font(.system(size: 16, weight: .semibold))
                     }
@@ -91,7 +128,7 @@ struct HotelSearchView: View {
                     .frame(width: 1, height: 80)
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("ÇIKIŞ TARİHİ")
+                    Text(checkOutTitle)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 14, weight: .bold))
 
@@ -109,7 +146,7 @@ struct HotelSearchView: View {
                             .foregroundStyle(.oGray.opacity(0.7))
                         }
                     } else {
-                        Text("Tarih Seçiniz")
+                        Text(selectDateText)
                             .foregroundStyle(.oGray.opacity(0.5))
                             .font(.system(size: 16, weight: .regular))
                     }
@@ -138,7 +175,7 @@ struct HotelSearchView: View {
                             .lineLimit(1)
                     }
 
-                    Text("Misafir Ekle")
+                    Text(addGuestText)
                         .foregroundStyle(.oGray.opacity(0.5))
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -151,20 +188,20 @@ struct HotelSearchView: View {
                 Button {
                     searchModel.isBusinessTrip.toggle()
                 } label: {
-                    Image(systemName: searchModel.isBusinessTrip ? "checkmark.square.fill" : "square")
+                    Image(systemName: searchModel.isBusinessTrip ? AppIcons.checkMarkFill: AppIcons.square)
                         .foregroundStyle(searchModel.isBusinessTrip ? .oGreen : .gray)
                         .font(.system(size: 20))
                 }
                 .buttonStyle(.plain)
-                
-                Text("İş için seyahat ediyorum")
+
+                Text(businessTripText)
                     .font(.system(size: 15, weight: .regular))
                     .foregroundStyle(.oGray.opacity(0.5))
-                
+
                 Spacer()
             }
 
-            SearchButtonView(title: "Otel Ara") {
+            SearchButtonView(title: searchButtonText) {
                 onSearchTap()
             }
             .padding(.horizontal, 40)

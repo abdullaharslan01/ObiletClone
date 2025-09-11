@@ -10,11 +10,17 @@ import SwiftUI
 struct PromotionView: View {
     let promotions: [PromotionCategory: [Promotion]]
     
+    let headerTitle: String
+    
     @State private var selectedCategory: PromotionCategory = .featured
     @State private var currentIndex = 0
     
-    init(promotions: [PromotionCategory: [Promotion]]) {
+    init(
+        promotions: [PromotionCategory: [Promotion]],
+        headerTitle: String = "Obilet'e özel fırsatlar"
+    ) {
         self.promotions = promotions
+        self.headerTitle = headerTitle
     }
     
     var body: some View {
@@ -36,7 +42,7 @@ struct PromotionView: View {
 extension PromotionView {
     
     private var headerView: some View {
-        Text("Obilet'e özel fırsatlar")
+        Text(headerTitle)
             .font(.title)
             .fontWeight(.semibold)
             .foregroundColor(.oGray)
@@ -131,6 +137,21 @@ struct PromotionCard: View {
     let promotion: Promotion
     let category: PromotionCategory
     
+    let netDiscountText: String
+    let netDiscountExclamationText: String
+    
+    init(
+        promotion: Promotion,
+        category: PromotionCategory,
+        netDiscountText: String = "net",
+        netDiscountExclamationText: String = "indirim!"
+    ) {
+        self.promotion = promotion
+        self.category = category
+        self.netDiscountText = netDiscountText
+        self.netDiscountExclamationText = netDiscountExclamationText
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             cardHeader
@@ -140,7 +161,7 @@ struct PromotionCard: View {
             cardFooter
         }
         .padding()
-        .background(Color(.systemBackground))
+        .background(Color.oBackground)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(radius: 2)
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -167,11 +188,15 @@ extension PromotionCard {
     private var cardContent: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 8) {
-                DiscountView(discount: promotion.discount)
+                DiscountView(
+                    discount: promotion.discount,
+                    netText: netDiscountText,
+                    exclamationText: netDiscountExclamationText
+                )
                 
                 Text(promotion.title)
                     .font(.subheadline)
-                    .foregroundColor(.primary)
+                    .foregroundColor(.oBlack)
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -184,7 +209,7 @@ extension PromotionCard {
     private var cardFooter: some View {
         Text(promotion.endDate)
             .font(.caption)
-            .foregroundColor(.secondary)
+            .foregroundColor(.oGray.opacity(0.8))
             .padding(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
@@ -215,6 +240,19 @@ struct CategoryTag: View {
 struct DiscountView: View {
     let discount: Discount
     
+    let netText: String
+    let exclamationText: String
+    
+    init(
+        discount: Discount,
+        netText: String = "net",
+        exclamationText: String = "indirim!"
+    ) {
+        self.discount = discount
+        self.netText = netText
+        self.exclamationText = exclamationText
+    }
+    
     var body: some View {
         HStack(spacing: 5) {
             Text(discount.displayText)
@@ -223,8 +261,8 @@ struct DiscountView: View {
                 .foregroundColor(.oMain)
             
             VStack(alignment: .leading) {
-                Text("net")
-                Text("indirim!")
+                Text(netText)
+                Text(exclamationText)
             }
             .font(.system(size: 15,weight: .bold))
             .foregroundColor(.oMain)
@@ -284,7 +322,6 @@ extension PromotionCategory {
     }
 }
 
-// MARK: - Usage Example
 #Preview {
     let samplePromotions: [PromotionCategory: [Promotion]] = [
         .featured: [
@@ -341,6 +378,9 @@ extension PromotionCategory {
         ]
     ]
     
-    PromotionView(promotions: samplePromotions)
-        .padding()
+    PromotionView(
+        promotions: samplePromotions,
+        headerTitle: "Özel Kampanyalar"
+    )
+    .padding()
 }

@@ -23,5 +23,10 @@ enum AppIcons {
     static let ferry = "ferry.fill"
     static let infoCircle = "info.circle"
     static let star = "star.fill"
+    static let xmarkCircle = "xmark.circle"
+    static let xmarkCircleFill = "xmark.circle.fill"
+    static let xmark = "xmark"
+    static let plusCircle = "plus.circle"
+    static let checkMarkFill = "checkmark.square.fill"
+    static let square = "square"
 }
-

@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct RootView: View {
+    
+    init() {
+        UIScrollView.appearance().bounces = false
+
+    }
+    
+    
+    
     var body: some View {
         OTabView()
     }

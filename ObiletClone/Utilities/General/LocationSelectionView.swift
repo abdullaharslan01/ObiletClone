@@ -13,17 +13,18 @@ struct LocationSelectionView: View {
     let onTap: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
-                .foregroundStyle(.oMain)
-                .font(.system(size: 15, weight: .bold))
+        Button {
+            onTap()
+        } label: {
+            VStack(alignment: .leading) {
+                Text(title)
+                    .foregroundStyle(.oMain)
+                    .font(.system(size: 15, weight: .bold))
 
-            Text(selectedLocation)
-                .foregroundStyle(.oBlack)
-                .font(.system(size: 17, weight: .regular))
-                .onTapGesture {
-                    onTap()
-                }
+                Text(selectedLocation)
+                    .foregroundStyle(.oBlack)
+                    .font(.system(size: 17, weight: .regular))
+            }
         }
     }
 }

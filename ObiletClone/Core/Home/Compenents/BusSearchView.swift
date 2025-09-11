@@ -15,6 +15,31 @@ struct BusSearchView: View {
     let onTodayTap: () -> Void
     let onTomorrowTap: () -> Void
     let onSearchBusTap:()->Void
+    
+    let searchButtonTitle: String
+    let bottomInfoText: String
+    
+    init(
+        searchModel: Binding<BusSearchModel>,
+        onFromLocationTap: @escaping () -> Void,
+        onToLocationTap: @escaping () -> Void,
+        onDateTap: @escaping () -> Void,
+        onTodayTap: @escaping () -> Void,
+        onTomorrowTap: @escaping () -> Void,
+        onSearchBusTap: @escaping () -> Void,
+        searchButtonTitle: String = "Otobüs Ara",
+        bottomInfoText: String = "Kesintisiz İade Hakkı ve 0 Komisyon"
+    ) {
+        self._searchModel = searchModel
+        self.onFromLocationTap = onFromLocationTap
+        self.onToLocationTap = onToLocationTap
+        self.onDateTap = onDateTap
+        self.onTodayTap = onTodayTap
+        self.onTomorrowTap = onTomorrowTap
+        self.onSearchBusTap = onSearchBusTap
+        self.searchButtonTitle = searchButtonTitle
+        self.bottomInfoText = bottomInfoText
+    }
 
     var body: some View {
         VStack(spacing: 25) {
@@ -41,15 +66,13 @@ struct BusSearchView: View {
             .padding(.vertical)
             .oCardBackground()
             
-            SearchButtonView(title: "Otobüs Ara") {
+            SearchButtonView(title: searchButtonTitle) {
                 onSearchBusTap()
             }.padding(.horizontal,40)
             
-            Text("Kesintisiz İade Hakkı ve 0 Komisyon")
+            Text(bottomInfoText)
                 .font(.system(size: 12,weight: .regular))
                 .foregroundStyle(.oGray.opacity(0.5))
         }
     }
 }
-
-

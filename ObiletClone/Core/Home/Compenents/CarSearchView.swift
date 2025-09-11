@@ -28,17 +28,68 @@ struct CarSearchView: View {
     let onDropoffTimeTap: () -> Void
     let onSearchTap: () -> Void
 
+    let pickupLocationTitle: String
+    let deliveryLocationTitle: String
+    let checkboxText: String
+    let pickupDateTitle: String
+    let pickupTimeTitle: String
+    let deliveryDateTitle: String
+    let deliveryTimeTitle: String
+    let selectDateText: String
+    let selectTimeText: String
+    let searchButtonTitle: String
+
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "tr_TR")
         return formatter
     }()
-    
+
     private let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter
     }()
+
+    init(
+        searchModel: Binding<CarRentalSearchModel>,
+        onPickupLocationTap: @escaping () -> Void,
+        onDropoffLocationTap: @escaping () -> Void,
+        onPickupDateTap: @escaping () -> Void,
+        onPickupTimeTap: @escaping () -> Void,
+        onDropoffDateTap: @escaping () -> Void,
+        onDropoffTimeTap: @escaping () -> Void,
+        onSearchTap: @escaping () -> Void,
+        pickupLocationTitle: String = "ALIŞ YERİ",
+        deliveryLocationTitle: String = "TESLİM YERİ",
+        checkboxText: String = "Alış yerinde teslim edilecek",
+        pickupDateTitle: String = "ALIŞ TARİHİ",
+        pickupTimeTitle: String = "ALIŞ SAATİ",
+        deliveryDateTitle: String = "TESLİM TARİHİ",
+        deliveryTimeTitle: String = "TESLİM SAATİ",
+        selectDateText: String = "Tarih Seçiniz",
+        selectTimeText: String = "Saat Seçiniz",
+        searchButtonTitle: String = "Kiralık Araç Ara"
+    ) {
+        _searchModel = searchModel
+        self.onPickupLocationTap = onPickupLocationTap
+        self.onDropoffLocationTap = onDropoffLocationTap
+        self.onPickupDateTap = onPickupDateTap
+        self.onPickupTimeTap = onPickupTimeTap
+        self.onDropoffDateTap = onDropoffDateTap
+        self.onDropoffTimeTap = onDropoffTimeTap
+        self.onSearchTap = onSearchTap
+        self.pickupLocationTitle = pickupLocationTitle
+        self.deliveryLocationTitle = deliveryLocationTitle
+        self.checkboxText = checkboxText
+        self.pickupDateTitle = pickupDateTitle
+        self.pickupTimeTitle = pickupTimeTitle
+        self.deliveryDateTitle = deliveryDateTitle
+        self.deliveryTimeTitle = deliveryTimeTitle
+        self.selectDateText = selectDateText
+        self.selectTimeText = selectTimeText
+        self.searchButtonTitle = searchButtonTitle
+    }
 
     private func formatDate(_ date: Date) -> (day: String, month: String, weekday: String) {
         dateFormatter.dateFormat = "d"
@@ -58,7 +109,7 @@ struct CarSearchView: View {
             HStack(spacing: 15) {
                 Image(AppImages.location)
 
-                LocationSelectionView(title: "ALIŞ YERİ", selectedLocation: searchModel.pickupLocation) {
+                LocationSelectionView(title: pickupLocationTitle, selectedLocation: searchModel.pickupLocation) {
                     onPickupLocationTap()
                 }
 
@@ -66,7 +117,7 @@ struct CarSearchView: View {
                 .padding(.horizontal)
                 .padding(.vertical)
                 .oCardBackground()
-            
+
             HStack {
                 Button {
                     searchModel.isDropoffAtPickupLocation.toggle()
@@ -76,11 +127,11 @@ struct CarSearchView: View {
                         .font(.system(size: 20))
                 }
                 .buttonStyle(.plain)
-                
-                Text("Alış yerinde teslim edilecek")
+
+                Text(checkboxText)
                     .font(.system(size: 15, weight: .regular))
                     .foregroundStyle(.oBlack)
-                
+
                 Spacer()
             }
 
@@ -88,7 +139,7 @@ struct CarSearchView: View {
                 HStack(spacing: 15) {
                     Image(AppImages.location)
 
-                    LocationSelectionView(title: "TESLİM YERİ", selectedLocation: searchModel.dropoffLocation) {
+                    LocationSelectionView(title: deliveryLocationTitle, selectedLocation: searchModel.dropoffLocation) {
                         onDropoffLocationTap()
                     }
 
@@ -106,7 +157,7 @@ struct CarSearchView: View {
                     .foregroundStyle(.oGray.opacity(0.7))
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("ALIŞ TARİHİ")
+                    Text(pickupDateTitle)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 14, weight: .bold))
 
@@ -124,7 +175,7 @@ struct CarSearchView: View {
                             .foregroundStyle(.oGray.opacity(0.7))
                         }
                     } else {
-                        Text("Tarih Seçiniz")
+                        Text(selectDateText)
                             .foregroundStyle(.oGray.opacity(0.5))
                             .font(.system(size: 16, weight: .semibold))
                     }
@@ -140,7 +191,7 @@ struct CarSearchView: View {
                     .frame(width: 1, height: 80)
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("ALIŞ SAATİ")
+                    Text(pickupTimeTitle)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 14, weight: .bold))
 
@@ -149,13 +200,13 @@ struct CarSearchView: View {
                             Image(systemName: "clock")
                                 .font(.system(size: 15))
                                 .foregroundStyle(.oGray.opacity(0.7))
-                            
+
                             Text(timeFormatter.string(from: pickupTime))
                                 .foregroundStyle(.oBlack)
                                 .font(.system(size: 20))
                         }
                     } else {
-                        Text("Saat Seçiniz")
+                        Text(selectTimeText)
                             .foregroundStyle(.oGray.opacity(0.5))
                             .font(.system(size: 16, weight: .semibold))
                     }
@@ -169,7 +220,7 @@ struct CarSearchView: View {
             .padding(.horizontal)
             .padding(.vertical)
             .oCardBackground()
-            
+
             HStack(spacing: 15) {
                 Image(systemName: AppIcons.calendar)
                     .resizable()
@@ -178,7 +229,7 @@ struct CarSearchView: View {
                     .foregroundStyle(.oGray.opacity(0.7))
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("TESLİM TARİHİ")
+                    Text(deliveryDateTitle)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 14, weight: .bold))
 
@@ -196,7 +247,7 @@ struct CarSearchView: View {
                             .foregroundStyle(.oGray.opacity(0.7))
                         }
                     } else {
-                        Text("Tarih Seçiniz")
+                        Text(selectDateText)
                             .foregroundStyle(.oGray.opacity(0.5))
                             .font(.system(size: 16, weight: .semibold))
                     }
@@ -212,7 +263,7 @@ struct CarSearchView: View {
                     .frame(width: 1, height: 80)
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("TESLİM SAATİ")
+                    Text(deliveryTimeTitle)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 14, weight: .bold))
 
@@ -221,13 +272,13 @@ struct CarSearchView: View {
                             Image(systemName: "clock")
                                 .font(.system(size: 15))
                                 .foregroundStyle(.oGray.opacity(0.7))
-                            
+
                             Text(timeFormatter.string(from: dropoffTime))
                                 .foregroundStyle(.oBlack)
                                 .font(.system(size: 20))
                         }
                     } else {
-                        Text("Saat Seçiniz")
+                        Text(selectTimeText)
                             .foregroundStyle(.oGray.opacity(0.5))
                             .font(.system(size: 16, weight: .semibold))
                     }
@@ -242,7 +293,7 @@ struct CarSearchView: View {
             .padding(.vertical)
             .oCardBackground()
 
-            SearchButtonView(title: "Kiralık Araç Ara") {
+            SearchButtonView(title: searchButtonTitle) {
                 onSearchTap()
             }
             .padding(.horizontal, 40)

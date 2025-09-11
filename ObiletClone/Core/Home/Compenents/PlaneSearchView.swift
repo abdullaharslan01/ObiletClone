@@ -16,6 +16,14 @@ struct PlaneSearchView: View {
     let onPassengerTap: () -> Void
     let onSearchTap: () -> Void
 
+    var departureTitle: String
+    var returnTitle: String
+    var selectDateText: String
+    var addReturnText: String
+    var addPassengerText: String
+    var directOnlyText: String
+    var searchButtonText: String
+
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "tr_TR")
@@ -33,6 +41,38 @@ struct PlaneSearchView: View {
         let weekday = dateFormatter.string(from: date)
 
         return (day, month, weekday)
+    }
+
+    init(
+        searchModel: Binding<PlaneSearchModel>,
+        onFromLocationTap: @escaping () -> Void,
+        onToLocationTap: @escaping () -> Void,
+        onDepartureDateTap: @escaping () -> Void,
+        onReturnDateTap: @escaping () -> Void,
+        onPassengerTap: @escaping () -> Void,
+        onSearchTap: @escaping () -> Void,
+        departureTitle: String = "GİDİŞ TARİHİ",
+        returnTitle: String = "DÖNÜŞ TARİHİ",
+        selectDateText: String = "Tarih Seçiniz",
+        addReturnText: String = "Dönüş Ekle",
+        addPassengerText: String = "Yolcu Ekle",
+        directOnlyText: String = "Sadece aktarmasız uçuşları göster",
+        searchButtonText: String = "Uçuş Ara"
+    ) {
+        self._searchModel = searchModel
+        self.onFromLocationTap = onFromLocationTap
+        self.onToLocationTap = onToLocationTap
+        self.onDepartureDateTap = onDepartureDateTap
+        self.onReturnDateTap = onReturnDateTap
+        self.onPassengerTap = onPassengerTap
+        self.onSearchTap = onSearchTap
+        self.departureTitle = departureTitle
+        self.returnTitle = returnTitle
+        self.selectDateText = selectDateText
+        self.addReturnText = addReturnText
+        self.addPassengerText = addPassengerText
+        self.directOnlyText = directOnlyText
+        self.searchButtonText = searchButtonText
     }
 
     var body: some View {
@@ -59,7 +99,7 @@ struct PlaneSearchView: View {
                     .foregroundStyle(.oGray.opacity(0.7))
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("GİDİŞ TARİHİ")
+                    Text(departureTitle)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 14, weight: .bold))
 
@@ -77,7 +117,7 @@ struct PlaneSearchView: View {
                             .foregroundStyle(.oGray.opacity(0.7))
                         }
                     } else {
-                        Text("Tarih Seçiniz")
+                        Text(selectDateText)
                             .foregroundStyle(.oGray.opacity(0.5))
                             .font(.system(size: 16, weight: .semibold))
                     }
@@ -93,7 +133,7 @@ struct PlaneSearchView: View {
                     .frame(width: 1, height: 80)
 
                 VStack(alignment: .leading, spacing: 15) {
-                    Text("DÖNÜŞ TARİHİ")
+                    Text(returnTitle)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 14, weight: .bold))
 
@@ -112,7 +152,7 @@ struct PlaneSearchView: View {
                         }
                     } else {
                         HStack {
-                            Text("Dönüş Ekle")
+                            Text(addReturnText)
                                 .foregroundStyle(.oGray.opacity(0.5))
                                 .font(.system(size: 16, weight: .regular))
                             
@@ -124,7 +164,7 @@ struct PlaneSearchView: View {
                                     onReturnDateTap()
                                 }
                             } label: {
-                                Image(systemName: searchModel.returnDate != nil ? "xmark.circle" : "plus.circle")
+                                Image(systemName: searchModel.returnDate != nil ? AppIcons.xmarkCircle : AppIcons.plusCircle)
                                     .foregroundStyle(.oGray.opacity(0.5))
                                     .font(.system(size: 20))
                             }
@@ -136,8 +176,6 @@ struct PlaneSearchView: View {
                 .onTapGesture {
                     onReturnDateTap()
                 }
-
-              
             }
             .padding(.horizontal)
             .padding(.vertical)
@@ -157,7 +195,7 @@ struct PlaneSearchView: View {
                             .lineLimit(1)
                     }
 
-                    Text("Yolcu Ekle")
+                    Text(addPassengerText)
                         .foregroundStyle(.oGray.opacity(0.5))
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -168,7 +206,7 @@ struct PlaneSearchView: View {
 
             HStack {
                 Spacer()
-                Text("Sadece aktarmasız uçuşları göster")
+                Text(directOnlyText)
                     .font(.system(size: 15, weight: .regular))
                     .foregroundStyle(.oGray.opacity(0.5))
 
@@ -176,7 +214,7 @@ struct PlaneSearchView: View {
                     .labelsHidden()
             }
 
-            SearchButtonView(title: "Uçuş Ara") {
+            SearchButtonView(title: searchButtonText) {
                 onSearchTap()
             }
             .padding(.horizontal, 40)

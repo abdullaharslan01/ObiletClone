@@ -11,4 +11,5 @@ enum AppImages {
     static let logoRed = "logo-red"
     static let logoWhite = "logo-white"
     static let location = "location"
+    static let tr = "tr"
 }

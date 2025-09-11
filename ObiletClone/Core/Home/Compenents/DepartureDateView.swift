@@ -13,6 +13,28 @@ struct DepartureDateView: View {
     let onTodayTap: () -> Void
     let onTomorrowTap: () -> Void
 
+    var titleText: String
+    var todayText: String
+    var tomorrowText: String
+
+    init(
+        searchModel: Binding<BusSearchModel>,
+        onDateTap: @escaping () -> Void,
+        onTodayTap: @escaping () -> Void,
+        onTomorrowTap: @escaping () -> Void,
+        titleText: String = "Gidiş Tarihi",
+        todayText: String = "Bugün",
+        tomorrowText: String = "Yarın"
+    ) {
+        self._searchModel = searchModel
+        self.onDateTap = onDateTap
+        self.onTodayTap = onTodayTap
+        self.onTomorrowTap = onTomorrowTap
+        self.titleText = titleText
+        self.todayText = todayText
+        self.tomorrowText = tomorrowText
+    }
+
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "tr_TR")
@@ -39,7 +61,7 @@ struct DepartureDateView: View {
 
             VStack(alignment: .leading, spacing: 15) {
                 VStack(alignment: .leading) {
-                    Text("Gidiş Tarihi")
+                    Text(titleText)
                         .foregroundStyle(.oMain)
                         .font(.system(size: 18, weight: .bold))
 
@@ -55,7 +77,7 @@ struct DepartureDateView: View {
                     Button {
                         onTodayTap()
                     } label: {
-                        Text("Bugün")
+                        Text(todayText)
                             .foregroundStyle(isToday ? .oWhite : .oBlack)
                             .padding(.horizontal, 15)
                             .padding(.vertical, 10)
@@ -72,7 +94,7 @@ struct DepartureDateView: View {
                     Button {
                         onTomorrowTap()
                     } label: {
-                        Text("Yarın")
+                        Text(tomorrowText)
                             .foregroundStyle(isTomorrow ? .oWhite : .oBlack)
                             .padding(.horizontal, 15)
                             .padding(.vertical, 10)
@@ -86,7 +108,8 @@ struct DepartureDateView: View {
                             )
                     }
                 }
-            }.frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
