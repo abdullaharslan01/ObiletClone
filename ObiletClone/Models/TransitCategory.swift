@@ -35,4 +35,25 @@ enum TransitCategory: CaseIterable, Identifiable {
         case .ferry: return AppIcons.ferry
         }
     }
+    
+    var logTitle: String {
+        switch self {
+        case .bus: return "GELECEK TARİHLİ BİLETLERİM"
+        case .plane: return "GELECEK TARİHLİ BİLETLERİM"
+        case .hotel: return "GELECEK TARİHLİ REZARVASYONLARIM"
+        case .car: return "GELECEK TARİHLİ REZARVASYONLARIM"
+        case .ferry: return ""
+        }
+    }
+    
+    var emtyText: String {
+        switch self {
+        case .bus: return "Satın alınmış otobüs biletiniz bulunmamaktadır."
+        case .plane: return "Satın alınmış uçuk biletiniz bulunmamaktadır."
+        case .hotel: return "Rezarvasyonunuz bulunmamaktadır."
+        case .car: return "Rezarvasyonunuz bulunmamaktadır."
+        case .ferry: return ""
+        }
+    }
+
 }
