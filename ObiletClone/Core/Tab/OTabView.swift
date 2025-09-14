@@ -28,7 +28,7 @@ struct OTabView: View {
                 }
                 .tag(OTab.search)
 
-            Text("Seyahatlerim")
+            MyTripsView()
                 .tabItem {
                     Image(systemName: OTab.myTrips.symbol)
                     Text(OTab.myTrips.title)

@@ -52,7 +52,7 @@ struct MyTripsView: View {
                                     )
                                     
                                     Button {
-                                        
+                                        handleCategorySearch()
                                     } label: {
                                         Text(selectedCategory.title + " Ara")
                                             .foregroundStyle(.oWhite)
@@ -110,6 +110,9 @@ struct MyTripsView: View {
         .onAppear {
             loadTravels()
         }
+        .onChange(of: selectedCategory) { _ in
+            loadTravelsForCategory()
+        }
     }
 
     private func loadTravels() {
@@ -120,6 +123,41 @@ struct MyTripsView: View {
                 isLoading = false
             }
         }
+    }
+    
+    private func loadTravelsForCategory() {
+        switch selectedCategory {
+        case .bus:
+            fetchBusData()
+        case .plane:
+            fetchFlightData()
+        case .hotel:
+            fetchHotelData()
+        case .car:
+            fetchCarData()
+        default:
+            break
+        }
+    }
+    
+    private func handleCategorySearch() {
+        loadTravelsForCategory()
+    }
+    
+    private func fetchBusData() {
+        travels = Travel.sampleTravels
+    }
+    
+    private func fetchFlightData() {
+        travels = []
+    }
+    
+    private func fetchHotelData() {
+        travels = []
+    }
+    
+    private func fetchCarData() {
+        travels = []
     }
 
     private func handlePnrRequest() {
@@ -152,4 +190,3 @@ struct CategoryLabel: View {
 #Preview {
     MyTripsView()
 }
-
