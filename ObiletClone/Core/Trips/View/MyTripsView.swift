@@ -10,7 +10,7 @@ import SwiftUI
 struct MyTripsView: View {
     @State private var travels: [Travel] = []
     @State private var isLoading = true
-    @State private var selectedCategory: TransitCategory = .plane
+    @State private var selectedCategory: TransitCategory = .bus
     @State private var showFerryView: Bool = false
 
     var body: some View {
@@ -19,9 +19,7 @@ struct MyTripsView: View {
 
             VStack(spacing: 0) {
                 Text("Seyahatlerim")
-                    .font(.system(size: 25, weight: .semibold))
-                    .padding(.vertical)
-                    .foregroundStyle(.oWhite)
+                    .makeHeaderView()
 
                 TripCategoryView(selectedCategory: $selectedCategory) {
                     showFerryView = true

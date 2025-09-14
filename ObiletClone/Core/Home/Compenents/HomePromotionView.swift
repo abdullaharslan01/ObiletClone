@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PromotionView: View {
+struct HomePromotionView: View {
     let promotions: [PromotionCategory: [Promotion]]
     
     let headerTitle: String
@@ -39,7 +39,7 @@ struct PromotionView: View {
     }
 }
 
-extension PromotionView {
+extension HomePromotionView {
     
     private var headerView: some View {
         Text(headerTitle)
@@ -87,7 +87,7 @@ extension PromotionView {
     }
 }
 
-extension PromotionView {
+extension HomePromotionView {
     
     private var currentPromotions: [Promotion] {
         return promotions[selectedCategory] ?? []
@@ -101,22 +101,57 @@ extension PromotionView {
     }
 }
 
+
+enum CategoryType:Int {
+    case home = 0
+    case promotion = 1
+    
+   
+}
+
 struct CategoryButton: View {
+    let categoryType:CategoryType
     let category: PromotionCategory
     let isSelected: Bool
     let action: () -> Void
     
+    init(categoryType: CategoryType = .home, category: PromotionCategory, isSelected: Bool, action: @escaping () -> Void) {
+        self.categoryType = categoryType
+        self.category = category
+        self.isSelected = isSelected
+        self.action = action
+    }
+    
+    
     var body: some View {
         Button(action: action) {
-            Text(category.title)
-                .font(.caption)
-                .fontWeight(isSelected ? .semibold : .regular)
-                .foregroundColor(isSelected ? .oMain : .oGray)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 14)
-                .background(backgroundColor)
-                .overlay(borderOverlay)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+            
+            if category == .featured {
+                
+                Text(category.title[categoryType.rawValue])
+                    .font(.caption)
+                    .fontWeight(isSelected ? .semibold : .regular)
+                    .foregroundColor(isSelected ? .oMain : .oGray)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 14)
+                    .background(backgroundColor)
+                    .overlay(borderOverlay)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                
+            } else {
+                
+                Text(category.title[0])
+                    .font(.caption)
+                    .fontWeight(isSelected ? .semibold : .regular)
+                    .foregroundColor(isSelected ? .oMain : .oGray)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 14)
+                    .background(backgroundColor)
+                    .overlay(borderOverlay)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+            
+         
         }
     }
     
@@ -226,7 +261,7 @@ struct CategoryTag: View {
             Image(systemName: category.icon)
                 .font(.caption2)
                 .foregroundStyle(.oMain)
-            Text(category.title)
+            Text(category.title[0])
                 .font(.caption2)
                 .foregroundStyle(.oGray)
         }
@@ -378,7 +413,7 @@ extension PromotionCategory {
         ]
     ]
     
-    PromotionView(
+    HomePromotionView(
         promotions: samplePromotions,
         headerTitle: "Özel Kampanyalar"
     )

@@ -38,13 +38,13 @@ enum PromotionCategory: String, CaseIterable, Identifiable {
     
     var id: String { rawValue }
     
-    var title: String {
+    var title: [String] {
         switch self {
-        case .featured: return "Öne Çıkan"
-        case .bus: return "Otobüs"
-        case .flight: return "Uçak"
-        case .hotel: return "Otel"
-        case .ferry: return "Feribot"
+        case .featured: return ["Öne Çıkan","Tümü"]
+        case .bus: return ["Otobüs"]
+        case .flight: return ["Uçak"]
+        case .hotel: return ["Otel"]
+        case .ferry: return ["Feribot"]
         }
     }
 }

@@ -35,7 +35,7 @@ enum TransitCategory: CaseIterable, Identifiable {
         case .ferry: return AppIcons.ferry
         }
     }
-    
+
     var logTitle: String {
         switch self {
         case .bus: return "GELECEK TARİHLİ BİLETLERİM"
@@ -45,7 +45,7 @@ enum TransitCategory: CaseIterable, Identifiable {
         case .ferry: return ""
         }
     }
-    
+
     var emtyText: String {
         switch self {
         case .bus: return "Satın alınmış otobüs biletiniz bulunmamaktadır."
@@ -55,5 +55,4 @@ enum TransitCategory: CaseIterable, Identifiable {
         case .ferry: return ""
         }
     }
-
 }

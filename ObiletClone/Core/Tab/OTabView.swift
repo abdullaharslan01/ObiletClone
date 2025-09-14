@@ -35,7 +35,7 @@ struct OTabView: View {
                 }
                 .tag(OTab.myTrips)
 
-            Text("Kampanyalar")
+           PromotionView()
                 .tabItem {
                     Image(systemName: OTab.promotions.symbol)
                     Text(OTab.promotions.title)
