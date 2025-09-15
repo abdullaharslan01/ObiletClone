@@ -34,6 +34,7 @@ enum AppIcons {
 
     static let chevronLeft = "chevron.left"
     static let chevronRight = "chevron.right"
+    static let chevronDown = "chevron.down"
     static let share =  "square.and.arrow.up"
     static let safari = "safari"
 }

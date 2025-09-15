@@ -12,4 +12,12 @@ enum AppImages {
     static let logoWhite = "logo-white"
     static let location = "location"
     static let tr = "tr"
+    static let bus = "help-bus"
+    static let car = "help-car"
+    static let ferry = "help-ferry"
+    static let hotel = "help-hotel"
+    static let plane = "help-plane"
+    static let train = "help-train"
+    static let searchHeadere = "search-header"
+    
 }

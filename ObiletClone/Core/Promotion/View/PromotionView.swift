@@ -36,7 +36,7 @@ struct PromotionView: View {
 
     var body: some View {
         ZStack {
-            Color.oMain.ignoresSafeArea()
+             Color.oMain.ignoresSafeArea()
 
             VStack(spacing: 0) {
                 Text("Kampanyalar")
