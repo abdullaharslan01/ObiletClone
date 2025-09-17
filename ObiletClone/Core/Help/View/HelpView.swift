@@ -54,5 +54,8 @@ struct MainContentView: View {
 }
 
 #Preview {
-    HelpView()
+    NavigationView {
+        HelpView()
+
+    }
 }

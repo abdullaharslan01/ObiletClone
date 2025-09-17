@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct OTabView: View {
     @State private var selectedTab: OTab = .search
 
@@ -21,40 +20,55 @@ struct OTabView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Image(systemName: OTab.search.symbol)
-                    Text(OTab.search.title)
-                }
-                .tag(OTab.search)
+            NavigationView(content: {
+                HomeView()
+            })
 
-            MyTripsView()
-                .tabItem {
-                    Image(systemName: OTab.myTrips.symbol)
-                    Text(OTab.myTrips.title)
-                }
-                .tag(OTab.myTrips)
+            .tabItem {
+                Image(systemName: OTab.search.symbol)
+                Text(OTab.search.title)
+            }
+            .tag(OTab.search)
 
-           PromotionView()
-                .tabItem {
-                    Image(systemName: OTab.promotions.symbol)
-                    Text(OTab.promotions.title)
-                }
-                .tag(OTab.promotions)
+            NavigationView(content: {
+                MyTripsView()
+            })
 
-            Text("Yardım")
-                .tabItem {
-                    Image(systemName: OTab.help.symbol)
-                    Text(OTab.help.title)
-                }
-                .tag(OTab.help)
+            .tabItem {
+                Image(systemName: OTab.myTrips.symbol)
+                Text(OTab.myTrips.title)
+            }
+            .tag(OTab.myTrips)
 
-            Text("Hesabım")
-                .tabItem {
-                    Image(systemName: OTab.account.symbol)
-                    Text(OTab.account.title)
-                }
-                .tag(OTab.account)
+            NavigationView(content: {
+                PromotionView()
+            })
+
+            .tabItem {
+                Image(systemName: OTab.promotions.symbol)
+                Text(OTab.promotions.title)
+            }
+            .tag(OTab.promotions)
+
+            NavigationView(content: {
+                HelpView()
+            })
+
+            .tabItem {
+                Image(systemName: OTab.help.symbol)
+                Text(OTab.help.title)
+            }
+            .tag(OTab.help)
+
+            NavigationView {
+                AccountView()
+            }
+
+            .tabItem {
+                Image(systemName: OTab.account.symbol)
+                Text(OTab.account.title)
+            }
+            .tag(OTab.account)
         }
         .tint(.oMain)
     }

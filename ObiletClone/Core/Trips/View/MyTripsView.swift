@@ -18,8 +18,7 @@ struct MyTripsView: View {
             Color.oMain.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                Text("Seyahatlerim")
-                    .makeHeaderView()
+              
 
                 TripCategoryView(selectedCategory: $selectedCategory) {
                     showFerryView = true
@@ -93,6 +92,8 @@ struct MyTripsView: View {
                         FerryWebView()
                     })
             }
+            .navigationTitle("Seyehatlerim")
+            .navigationBarTitleDisplayMode(.inline)
 
         }.overlay(content: {
             if isLoading {
@@ -118,6 +119,7 @@ struct MyTripsView: View {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             withAnimation(.easeInOut(duration: 0.5)) {
+                fetchBusData()
                 isLoading = false
             }
         }
@@ -186,5 +188,9 @@ struct CategoryLabel: View {
 }
 
 #Preview {
-    MyTripsView()
+    
+    NavigationView {
+        MyTripsView()
+
+    }
 }

@@ -19,7 +19,7 @@ struct HelpCategoriesView: View {
                     currentLink: $currentLink,
                     expandedCategories: $expandedCategories
                 )
-                .padding(.top)
+                .padding(.top,10)
                 .padding(.horizontal)
             }
         }
@@ -90,7 +90,7 @@ struct CategoryHeaderButton: View {
             .padding()
             .background(.oWhite)
             .clipShape(RoundedRectangle(cornerRadius: AppRadius.card))
-            .shadow(color: .oBlack.opacity(0.1), radius: 1, y: 5)
+            .shadow(color: .oBlack.opacity(0.1), radius: 0.3, y: 3)
         }
     }
 }

@@ -36,40 +36,38 @@ struct PromotionView: View {
 
     var body: some View {
         ZStack {
-             Color.oMain.ignoresSafeArea()
+            Color.oMain.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                Text("Kampanyalar")
-                    .makeHeaderView()
+                CategoryTabView(
+                    selectedCategory: $selectedCategory,
+                    allCount: allCount,
+                    mineCount: mineCount
+                )
 
                 VStack {
-                    CategoryTabView(
-                        selectedCategory: $selectedCategory,
-                        allCount: allCount,
-                        mineCount: mineCount
-                    )
+                    ScrollView(.vertical, showsIndicators: false) {
+                        PromotionFilterBar(
+                            selectedPromotion: $selectedPromotion
+                        ).padding(.bottom)
 
-                    VStack {
-                        ScrollView(.vertical, showsIndicators: false) {
-                            PromotionFilterBar(
-                                selectedPromotion: $selectedPromotion
-                            ).padding(.bottom)
-
-                            PromotionListView(categories: filteredPromotions)
-                                .padding(.bottom)
-                        }
-                        .background(.oBackground)
-                        .padding(.horizontal)
+                        PromotionListView(categories: filteredPromotions)
+                            .padding(.bottom)
                     }
+                    .padding(.horizontal)
                 }
-                .background(.oBackground)
-                .customCorners()
-                .clipped()
+                .ignoresSafeArea()
             }
+            .background(.oBackground)
+            .topRoundedBackground(radius: 20, color: .oBackground)
         }
+        .navigationTitle("Kampanyalar")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    PromotionView()
+    NavigationView {
+        PromotionView()
+    }
 }

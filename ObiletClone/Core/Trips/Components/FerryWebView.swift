@@ -47,32 +47,32 @@ struct FerryWebView: View {
                             }
                             .foregroundColor(.oMain)
                         }
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            HStack {
-                                Button {} label: {
-                                    VStack(alignment: .leading, spacing: 5) {
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .stroke(Color.oMain, lineWidth: 2)
-                                            .frame(width: 20, height: 12)
+                           ToolbarItem(placement: .navigationBarTrailing) {
+                               Button {} label: {
+                                   VStack(alignment: .leading, spacing: 5) {
+                                       RoundedRectangle(cornerRadius: 2)
+                                           .stroke(Color.oMain, lineWidth: 2)
+                                           .frame(width: 20, height: 12)
 
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color.oMain, lineWidth: 1)
-                                            .frame(width: 15, height: 1)
+                                       RoundedRectangle(cornerRadius: 5)
+                                           .stroke(Color.oMain, lineWidth: 1)
+                                           .frame(width: 15, height: 1)
 
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color.oMain, lineWidth: 1)
-                                            .frame(width: 10, height: 1)
-                                    }
-                                }
+                                       RoundedRectangle(cornerRadius: 5)
+                                           .stroke(Color.oMain, lineWidth: 1)
+                                           .frame(width: 10, height: 1)
+                                   }
+                               }
+                           }
 
-                                Button {
-                                    webView?.reload()
-                                } label: {
-                                    Image(systemName: AppIcons.clock)
-                                }
-                                .foregroundColor(.oMain)
-                            }
-                        }
+                           ToolbarItem(placement: .navigationBarTrailing) {
+                               Button {
+                                   webView?.reload()
+                               } label: {
+                                   Image(systemName: AppIcons.clock)
+                               }
+                               .foregroundColor(.oMain)
+                           }
 
                         ToolbarItemGroup(placement: .bottomBar) {
                             HStack {
@@ -111,7 +111,7 @@ struct FerryWebView: View {
                         }
                     }
             }
-        }
+        }.colorScheme(.light)
     }
 }
 

@@ -13,7 +13,7 @@ struct SearchHeaderView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(height: 100)
+                .frame(height: 90)
                 .overlay {
                     Image(AppImages.searchHeadere)
                         .resizable()
@@ -34,7 +34,7 @@ struct SearchTextField: View {
         ZStack(alignment: .leading) {
             if searchText.isEmpty {
                 Text("Nasıl yardımcı olabiliriz?")
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(.gray)
                     .padding(.leading, 15)
             }

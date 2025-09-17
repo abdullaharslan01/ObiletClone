@@ -29,12 +29,20 @@ enum AppIcons {
     static let plusCircle = "plus.circle"
     static let checkMarkFill = "checkmark.square.fill"
     static let square = "square"
-
     static let clock = "arrow.clockwise"
-
     static let chevronLeft = "chevron.left"
     static let chevronRight = "chevron.right"
     static let chevronDown = "chevron.down"
-    static let share =  "square.and.arrow.up"
+    static let share = "square.and.arrow.up"
     static let safari = "safari"
+    
+    static let travels = "car"
+    static let promotionsMenu = "gift"
+    static let alarms = "bell"
+    static let profile = "person.circle"
+    static let favorites = "heart"
+    static let helpMenu = "questionmark.circle"
+    static let settings = "gearshape"
+    static let about = "info.circle"
+    static let logout = "rectangle.portrait.and.arrow.right"
 }

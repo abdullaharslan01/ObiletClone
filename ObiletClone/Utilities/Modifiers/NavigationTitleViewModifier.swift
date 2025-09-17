@@ -20,7 +20,7 @@ struct NavigationTitleViewModifier: ViewModifier {
 }
 
 extension View {
-    func makeHeaderView(font: Font = .system(size: 25, weight: .semibold),
+    func makeHeaderView(font: Font = .system(size: 20, weight: .semibold),
                         verticalPadding: CGFloat = 16) -> some View
     {
         modifier(NavigationTitleViewModifier(font: font, verticalPadding: verticalPadding))

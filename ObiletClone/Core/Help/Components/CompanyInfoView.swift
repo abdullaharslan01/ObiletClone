@@ -32,13 +32,12 @@ struct CompanyInfoView: View {
 
                     Text(info.title)
                         .font(.system(size: 15))
-                }
+                }.foregroundStyle(.oBlack)
             }
         }
         .padding()
         .frame(maxWidth: .infinity)
         .background(Color.oWhite)
         .padding(.top, 50)
-        .padding(.vertical)
     }
 }
