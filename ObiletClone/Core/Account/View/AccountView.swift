@@ -57,43 +57,22 @@ private extension AccountView {
     }
 
     var logoutCard: some View {
-        Button {
+        SingleMenuCard(icon: AppIcons.logout, title: "Çıkış Yap") {
             handleLogout()
-        } label: {
-            SingleMenuCard(icon: AppIcons.logout, title: "Çıkış Yap")
         }
-        .background(Color.white)
-        .cornerRadius(8)
+
         .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
 
     func menuItemRow(menuItem: MenuItem, isLast: Bool) -> some View {
         VStack(spacing: 0) {
-            Button {
+            SingleMenuCard(icon: menuItem.icon, title: menuItem.title) {
                 handleMenuItemTap(menuItem)
-            } label: {
-                HStack(spacing: 12) {
-                    HStack(spacing: 12) {
-                        Image(systemName: menuItem.icon)
-                            .font(.system(size: 20, weight: .medium))
-                            .frame(width: 24, height: 24)
-
-                        Text(menuItem.title)
-                            .font(.system(size: 16, weight: .medium))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                    Image(systemName: AppIcons.chevronRight)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.gray)
-                }
-                .foregroundStyle(.oBlack)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 16)
             }
 
             if !isLast {
                 Divider()
+                    .opacity(0.55)
             }
         }
     }

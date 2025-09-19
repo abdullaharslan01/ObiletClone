@@ -69,7 +69,7 @@ struct FerryWebView: View {
                                Button {
                                    webView?.reload()
                                } label: {
-                                   Image(systemName: AppIcons.clock)
+                                   Image(systemName: AppIcons.refresh)
                                }
                                .foregroundColor(.oMain)
                            }

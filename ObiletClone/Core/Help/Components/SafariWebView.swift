@@ -42,7 +42,12 @@ struct SafariWebView: View {
 
     var body: some View {
         if let url = URL(string: currentLink) {
-            HelpSafariView(url: url)
+            ZStack {
+                Color.oBackground.ignoresSafeArea()
+                HelpSafariView(url: url)
+
+            }
+            
         }
     }
 }

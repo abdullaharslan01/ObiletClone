@@ -27,11 +27,11 @@ struct SingleMenuCard: View {
             HStack {
                 HStack(spacing: 12) {
                     Image(systemName: icon)
-                        .font(.system(size: 20, weight: .medium))
+                        .font(.system(size: 18))
                         .frame(width: 24, height: 24)
                     
                     Text(title)
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.system(size: 12))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -40,10 +40,10 @@ struct SingleMenuCard: View {
                     .foregroundColor(.gray)
             }
             .foregroundStyle(titleColor)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 16)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 12)
         }
-        .background(Color.white)
+        .background(.oBackground)
         .cornerRadius(8)
         .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
