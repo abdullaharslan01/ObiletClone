@@ -19,5 +19,11 @@ enum AppImages {
     static let plane = "help-plane"
     static let train = "help-train"
     static let searchHeadere = "search-header"
+    static let man = "man"
+    static let woman = "woman"
+    static let badge = "badge"
+    static let bankProvider = "bankProvider"
+    static let shield = "shield"
+    static let certifica = "certifica"
     
 }
