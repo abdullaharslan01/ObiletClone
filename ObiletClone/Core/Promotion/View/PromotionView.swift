@@ -8,55 +8,15 @@
 import SwiftUI
 
 struct PromotionView: View {
-    @State private var selectedCategory: PromotionCategoryType = .all
-    @State private var selectedPromotion: PromotionCategory = .featured
-    @State var allPromotions: [PromotionCategoryModel] = PromotionCategoryModel.demo
-
-    var filteredPromotions: [PromotionCategoryModel] {
-        let categoryFiltered = selectedCategory == .all ?
-            allPromotions : allPromotions.filter { $0.isUserCoupon }
-
-        if selectedPromotion == .featured {
-            return categoryFiltered
-        }
-
-        return categoryFiltered.filter { promotion in
-            promotion.categoryType == selectedPromotion ||
-                promotion.tag.contains(selectedPromotion)
-        }
-    }
-
-    var allCount: Int {
-        allPromotions.count
-    }
-
-    var mineCount: Int {
-        allPromotions.filter { $0.isUserCoupon }.count
-    }
+    @StateObject private var viewModel = PromotionViewModel()
 
     var body: some View {
         ZStack {
             Color.oMain.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                CategoryTabView(
-                    selectedCategory: $selectedCategory,
-                    allCount: allCount,
-                    mineCount: mineCount
-                )
-
-                VStack {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        PromotionFilterBar(
-                            selectedPromotion: $selectedPromotion
-                        ).padding(.bottom)
-
-                        PromotionListView(categories: filteredPromotions)
-                            .padding(.bottom)
-                    }
-                    .padding(.horizontal)
-                }
-                .ignoresSafeArea()
+                categoryTabSection
+                promotionContentSection
             }
             .background(.oBackground)
             .topRoundedBackground(radius: 20, color: .oBackground)
@@ -66,8 +26,40 @@ struct PromotionView: View {
     }
 }
 
+private extension PromotionView {
+    var categoryTabSection: some View {
+        CategoryTabView(
+            selectedCategory: $viewModel.selectedCategory,
+            allCount: viewModel.allCount,
+            mineCount: viewModel.mineCount
+        )
+    }
+    
+    var promotionContentSection: some View {
+        VStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                filterBarSection
+                promotionListSection
+            }
+            .padding(.horizontal)
+        }
+        .ignoresSafeArea()
+    }
+    
+    var filterBarSection: some View {
+        PromotionFilterBar(selectedPromotion: $viewModel.selectedPromotion)
+            .padding(.bottom)
+    }
+    
+    var promotionListSection: some View {
+        PromotionListView(categories: viewModel.filteredPromotions)
+            .padding(.bottom)
+    }
+}
+
 #Preview {
     NavigationView {
         PromotionView()
     }
 }
+

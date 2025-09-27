@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SeatSelection {
+struct SeatSelection:Hashable {
     let seatNumber: Int
     let gender: Gender
 }

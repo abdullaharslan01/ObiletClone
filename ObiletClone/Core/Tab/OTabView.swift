@@ -9,6 +9,8 @@ import SwiftUI
 
 struct OTabView: View {
     @State private var selectedTab: OTab = .search
+    @StateObject private var router = Router()
+
 
     init() {
         let appearance = UITabBarAppearance()
@@ -22,6 +24,9 @@ struct OTabView: View {
         TabView(selection: $selectedTab) {
             NavigationView(content: {
                 HomeView()
+                    .navigationDestination(for: AppPages.self) { page in
+                        router.build(page: page)
+                    }
             })
 
             .tabItem {

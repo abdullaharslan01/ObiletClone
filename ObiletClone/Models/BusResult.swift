@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BusResult: Identifiable {
+struct BusResult: Identifiable, Hashable {
     let id = UUID()
     let companyName: String
     let companyIcon: String
@@ -18,10 +18,10 @@ struct BusResult: Identifiable {
     let departureTerminal: String
     let arrivalTerminal: String
     let seatConfiguration: SeatConfiguration
-    let departureDate:Date
+    let departureDate: Date
 }
 
-struct SeatConfiguration {
+struct SeatConfiguration: Hashable {
     let seats: [Seat]
 
     var availableSeats: Int {
@@ -33,23 +33,23 @@ struct SeatConfiguration {
     }
 }
 
-struct Seat {
+struct Seat: Hashable {
     let number: Int
     let type: SeatType
     let isOccupied: Bool
     let gender: Gender?
 }
 
-enum SeatType {
+enum SeatType: Hashable {
     case single
     case double
 }
 
-enum Gender {
+enum Gender: Hashable {
     case male
     case female
     
-    var color:Color {
+    var color: Color {
         switch self {
         case .male:
             return Color.oBlue
@@ -58,7 +58,7 @@ enum Gender {
         }
     }
     
-    var genderSelectionColor:Color {
+    var genderSelectionColor: Color {
         switch self {
         case .male:
             return Color.man
@@ -67,7 +67,7 @@ enum Gender {
         }
     }
     
-    var icon:String {
+    var icon: String {
         switch self {
         case .male:
             return AppImages.man
@@ -76,7 +76,7 @@ enum Gender {
         }
     }
     
-    var title:String {
+    var title: String {
         switch self {
         case .male:
             return "Erkek"

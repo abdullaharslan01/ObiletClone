@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ObiletCloneApp: App {
+    @StateObject private var router = Router()
+
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environmentObject(router)
         }
     }
 }
