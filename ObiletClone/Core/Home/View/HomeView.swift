@@ -23,12 +23,12 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             Color.oMain.ignoresSafeArea()
-            
+
             ScrollView {
                 Rectangle()
                     .fill(Color.oMain)
                     .frame(height: 100)
-                
+
                 VStack {
                     logoSection
                     searchSection
@@ -55,7 +55,7 @@ private extension HomeView {
             .scaledToFit()
             .frame(height: 75)
     }
-    
+
     var searchSection: some View {
         LazyVStack(alignment: .leading, spacing: 20, pinnedViews: [.sectionHeaders]) {
             Section {
@@ -75,7 +75,7 @@ private extension HomeView {
         .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
         .padding(.horizontal)
     }
-    
+
     @ViewBuilder
     var selectedCategorySearchView: some View {
         switch viewModel.selectedCategory {
@@ -89,7 +89,7 @@ private extension HomeView {
                 onTomorrowTap: { viewModel.setBusSearchToTomorrow() },
                 onSearchBusTap: {}
             )
-            
+
         case .plane:
             PlaneSearchView(
                 searchModel: $viewModel.planeSearch,
@@ -100,7 +100,7 @@ private extension HomeView {
                 onPassengerTap: {},
                 onSearchTap: {}
             )
-            
+
         case .hotel:
             HotelSearchView(
                 searchModel: $viewModel.hotelSearch,
@@ -110,7 +110,7 @@ private extension HomeView {
                 onGuestTap: {},
                 onSearchTap: {}
             )
-            
+
         case .car:
             CarSearchView(
                 searchModel: $viewModel.carSearch,
@@ -122,7 +122,7 @@ private extension HomeView {
                 onDropoffTimeTap: {},
                 onSearchTap: {}
             )
-            
+
         case .ferry:
             FerrySearchView(
                 searchModel: $viewModel.ferrySearch,
@@ -135,20 +135,20 @@ private extension HomeView {
             )
         }
     }
-    
+
     var promotionSection: some View {
         HomePromotionView(promotions: viewModel.promotionData)
             .padding(.horizontal)
             .padding(.top)
     }
-    
+
     var dividerSection: some View {
         Rectangle()
             .fill(.oGray.opacity(0.5))
             .frame(height: 1)
             .padding(.horizontal)
     }
-    
+
     var languageInfoSection: some View {
         LanguageInfoView(
             flagImage: AppImages.tr,
@@ -157,7 +157,7 @@ private extension HomeView {
             currencyCode: "TRY"
         )
     }
-    
+
     var citySelectionSheet: some View {
         CitySelectionView(
             recentSearches: viewModel.dummyRecentSearches,
@@ -177,7 +177,7 @@ private extension HomeView {
         citySelectionType = type
         showCitySelection = true
     }
-    
+
     func getTitleText() -> String {
         switch citySelectionType {
         case .busFrom, .planeFrom, .ferryFrom:
@@ -190,7 +190,7 @@ private extension HomeView {
             return "Dönüş Yeri"
         }
     }
-    
+
     func getPlaceholderText() -> String {
         switch citySelectionType {
         case .hotelTo:
@@ -206,4 +206,3 @@ private extension HomeView {
 #Preview {
     HomeView()
 }
-
