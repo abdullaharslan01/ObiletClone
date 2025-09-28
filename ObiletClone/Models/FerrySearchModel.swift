@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FerrySearchModel: Identifiable, Codable, Equatable {
+struct FerrySearchModel: Identifiable, Codable, Equatable,Hashable {
     var id = UUID()
     var fromCity: String
     var toCity: String

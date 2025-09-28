@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum PassengerType: String, Codable, CaseIterable, Identifiable {
+enum PassengerType: String, Codable, CaseIterable, Identifiable,Hashable {
     case adult
     case student
     case child
@@ -80,7 +80,7 @@ enum PassengerType: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-struct PassengerSelection: Codable, Equatable, Identifiable {
+struct PassengerSelection: Codable, Equatable, Identifiable,Hashable {
     var id = UUID()
     var type: PassengerType
     var count: Int

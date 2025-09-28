@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CarRentalSearchModel: Identifiable, Codable, Equatable {
+struct CarRentalSearchModel: Identifiable, Codable, Equatable,Hashable {
     var id = UUID()
     var pickupLocation: String
     var dropoffLocation: String

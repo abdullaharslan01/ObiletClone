@@ -10,6 +10,7 @@ import SwiftUI
 struct ResultView: View {
     @StateObject private var viewModel = ResultViewModel()
     @StateObject private var filterManager = FilterManager()
+    @EnvironmentObject var router:Router
 
     var body: some View {
         VStack(spacing: 0) {
@@ -72,7 +73,7 @@ private extension ResultView {
             LazyVStack(spacing: 12) {
                 ForEach(viewModel.busResults) { busResult in
                     BusResultCard(busResult: busResult) { onConformation in
-                        viewModel.handleBusSelection(busResult)
+                        router.navigate(to:.payment(onConformation))
                     }
                 }
             }

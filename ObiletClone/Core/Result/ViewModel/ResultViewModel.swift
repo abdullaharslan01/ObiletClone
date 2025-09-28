@@ -109,9 +109,7 @@ class ResultViewModel: ObservableObject {
         print("Time filter tapped: \(filter)")
     }
 
-    func handleBusSelection(_ busResult: BusResult) {
-        print("Bus selected: \(busResult.companyName)")
-    }
+
 
     func handleRouteSwap() {
         print("Route swap tapped")

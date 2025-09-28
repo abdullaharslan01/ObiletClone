@@ -23,38 +23,20 @@ struct PaymentView: View {
     var body: some View {
         ScrollView {
             VStack {
-                headerSection
                 contentSection
+            }
+        }.toolbar {
+            ToolbarItem(placement: .title) {
+                Image(AppImages.logoWhite)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 80)
             }
         }
     }
 }
 
 private extension PaymentView {
-    var headerSection: some View {
-        Rectangle()
-            .fill(.oMain)
-            .frame(height: 100)
-            .overlay {
-                ZStack {
-                    Image(AppImages.logoWhite)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 80)
-
-                    HStack {
-                        Button {} label: {
-                            Image(systemName: AppIcons.chevronLeft)
-                                .font(.system(size: 28))
-                                .foregroundStyle(.oWhite)
-                                .padding(.leading)
-                        }
-                        Spacer()
-                    }
-                }
-            }
-    }
-
     var contentSection: some View {
         VStack {
             busResultSection

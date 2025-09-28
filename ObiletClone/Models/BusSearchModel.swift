@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BusSearchModel: Identifiable, Codable, Equatable {
+struct BusSearchModel: Identifiable, Codable, Equatable,Hashable {
     var id = UUID()
     var fromCity: String
     var toCity: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PlaneSearchModel: Identifiable, Codable, Equatable {
+struct PlaneSearchModel: Identifiable, Codable, Equatable,Hashable {
     var id = UUID()
     var fromCity: String
     var toCity: String

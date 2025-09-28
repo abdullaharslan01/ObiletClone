@@ -19,6 +19,8 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var showCitySelection = false
     @State private var citySelectionType: CitySelectionType = .busFrom
+    @EnvironmentObject var router: Router
+
 
     var body: some View {
         ZStack {
@@ -87,7 +89,9 @@ private extension HomeView {
                 onDateTap: {},
                 onTodayTap: { viewModel.setBusSearchToToday() },
                 onTomorrowTap: { viewModel.setBusSearchToTomorrow() },
-                onSearchBusTap: {}
+                onSearchBusTap: {
+                    router.navigate(to: .result)
+                }
             )
 
         case .plane:

@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct HotelRoom: Identifiable, Codable, Equatable {
+struct HotelRoom: Identifiable, Codable, Equatable,Hashable {
     var id = UUID()
     var adults: Int
     var children: Int
 }
 
-struct HotelSearchModel: Identifiable, Codable, Equatable {
+struct HotelSearchModel: Identifiable, Codable, Equatable,Hashable {
     var id = UUID()
     var toCity: String
     var checkInDate: Date?

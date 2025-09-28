@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RootView: View {
+    
     init() {
         UIScrollView.appearance().bounces = false
 
@@ -25,8 +26,12 @@ struct RootView: View {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
 
+    
+    @State var router = Router()
+    
     var body: some View {
         OTabView()
+            .environmentObject(router)
     }
 }
 
