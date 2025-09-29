@@ -7,5 +7,9 @@ All data is **local**, and no backend functionality is implemented. This project
 
 
 
+https://github.com/user-attachments/assets/0e94b09f-703c-46b8-bff9-204f7ae60f52
+
+
+
 > ⚠️ Note: Since the main purpose of this project is to **design screens**, localization and multi-language support (`Localizable`) were not included.
 
